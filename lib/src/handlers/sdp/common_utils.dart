@@ -1,8 +1,8 @@
 import 'package:sdp_transform/sdp_transform.dart';
-import 'package:mediasoup_client_flutter/src/rtp_parameters.dart';
-import 'package:mediasoup_client_flutter/src/sdp_object.dart';
-import 'package:mediasoup_client_flutter/src/handlers/sdp/media_section.dart';
-import 'package:mediasoup_client_flutter/src/transport.dart';
+import 'package:tapi_mediasoup_client/src/rtp_parameters.dart';
+import 'package:tapi_mediasoup_client/src/sdp_object.dart';
+import 'package:tapi_mediasoup_client/src/handlers/sdp/media_section.dart';
+import 'package:tapi_mediasoup_client/src/transport.dart';
 
 class CommonUtils {
   static RtpCapabilities extractRtpCapabilities(SdpObject sdpObject) {

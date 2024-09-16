@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:events2/events2.dart';
-import 'package:mediasoup_client_flutter/src/common/logger.dart';
+import 'package:tapi_mediasoup_client/src/common/logger.dart';
 
 Logger _logger = Logger('EnhancedEventEmitter');
 

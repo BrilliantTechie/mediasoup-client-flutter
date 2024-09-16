@@ -1,5 +1,5 @@
 ```
-import 'package:mediasoup_client_flutter/mediasoup_client_flutter.dart';
+import 'package:tapi_mediasoup_client/mediasoup_client_flutter.dart';
 import 'package:flutter_webrtc/flutter_webrtc';
 import 'package:my_project/my_signaling.dart';
 

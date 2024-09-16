@@ -1,4 +1,10 @@
-# mediasoup_client_flutter
+# tapi_mediasoup_client
+
+This is a modified version of [mediasoup-client-flutter](https://github.com/Blancduman/mediasoup-client-flutter) with added support for current WebRTC and other fixes.
+
+## Credits
+- Original Repository: [mediasoup-client-flutter](https://github.com/Blancduman/mediasoup-client-flutter)
+- Modified by: Tapi LLC Team
 
 |              | Android | iOS | macOS | Windows | Linux | Web |
 | :----------: | :-----: | :-: | :---: | :-----: | :---: | :-: |
@@ -9,7 +15,7 @@ No datachannels yet;
 # Usage Example
 
 ```dart
-import 'package:mediasoup_client_flutter/mediasoup_client_flutter.dart';
+import 'package:tapi_mediasoup_client/mediasoup_client_flutter.dart';
 import 'package:my_project/my_signaling.dart';
 
 // Create a device.

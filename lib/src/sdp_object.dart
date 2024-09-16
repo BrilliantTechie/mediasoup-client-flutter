@@ -1,4 +1,4 @@
-import 'package:mediasoup_client_flutter/src/handlers/sdp/media_section.dart';
+import 'package:tapi_mediasoup_client/src/handlers/sdp/media_section.dart';
 
 class Origin {
   final String username;

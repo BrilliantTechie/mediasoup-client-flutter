@@ -1,13 +1,13 @@
 import 'package:collection/collection.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:sdp_transform/sdp_transform.dart';
-import 'package:mediasoup_client_flutter/src/producer.dart';
-import 'package:mediasoup_client_flutter/src/rtp_parameters.dart';
-import 'package:mediasoup_client_flutter/src/sctp_parameters.dart';
-import 'package:mediasoup_client_flutter/src/sdp_object.dart';
-import 'package:mediasoup_client_flutter/src/transport.dart';
-import 'package:mediasoup_client_flutter/src/common/logger.dart';
-import 'package:mediasoup_client_flutter/src/handlers/sdp/media_section.dart';
+import 'package:tapi_mediasoup_client/src/producer.dart';
+import 'package:tapi_mediasoup_client/src/rtp_parameters.dart';
+import 'package:tapi_mediasoup_client/src/sctp_parameters.dart';
+import 'package:tapi_mediasoup_client/src/sdp_object.dart';
+import 'package:tapi_mediasoup_client/src/transport.dart';
+import 'package:tapi_mediasoup_client/src/common/logger.dart';
+import 'package:tapi_mediasoup_client/src/handlers/sdp/media_section.dart';
 
 Logger logger = Logger('RemoteSdp');
 
@@ -46,9 +46,9 @@ class RemoteSdp {
   // Whether this is Plan-B SDP.
   late bool _planB;
   // MediaSection instances with same order as in the SDP.
-  List<MediaSection> _mediaSections = <MediaSection>[];
+  final List<MediaSection> _mediaSections = <MediaSection>[];
   // MediaSection indices indexed by MID.
-  Map<String, int> _midToIndex = <String, int>{};
+  final Map<String, int> _midToIndex = <String, int>{};
   // First MID.
   String? _firstMid;
   // SDP object.
@@ -93,25 +93,25 @@ class RemoteSdp {
 
     // if DTLS parameters are given, assume WebRTC and BUNDLE.
     // if (dtlsParameters != null) {
-      _sdpObject.msidSemantic = MsidSemantic(
-        semantic: 'WMS',
-        token: '*',
-      );
+    _sdpObject.msidSemantic = MsidSemantic(
+      semantic: 'WMS',
+      token: '*',
+    );
 
-      // NOTE: We take the latest fingerprint.
-      int numFingerprints = _dtlsParameters.fingerprints.length;
+    // NOTE: We take the latest fingerprint.
+    int numFingerprints = _dtlsParameters.fingerprints.length;
 
-      _sdpObject.fingerprint = Fingerprint(
-        type: dtlsParameters.fingerprints[numFingerprints - 1].algorithm,
-        hash: dtlsParameters.fingerprints[numFingerprints - 1].value,
-      );
+    _sdpObject.fingerprint = Fingerprint(
+      type: dtlsParameters.fingerprints[numFingerprints - 1].algorithm,
+      hash: dtlsParameters.fingerprints[numFingerprints - 1].value,
+    );
 
-      _sdpObject.groups = [
-        Group(
-          type: 'BUNDLE',
-          mids: '',
-        ),
-      ];
+    _sdpObject.groups = [
+      Group(
+        type: 'BUNDLE',
+        mids: '',
+      ),
+    ];
     // }
 
     // If there are plain RPT parameters, override SDP origin.
@@ -191,9 +191,9 @@ class RemoteSdp {
   }
 
   void planBStopReceiving(
-    String mid,
-    RtpParameters offerRtpParameters,
-  ) {
+      String mid,
+      RtpParameters offerRtpParameters,
+      ) {
     int? idx = _midToIndex[mid];
 
     if (idx == null) {
@@ -271,7 +271,7 @@ class RemoteSdp {
       // Let's try to recycle a closed media section (if any).
       // NOTE: Yes, we can recycle a closed m=audio section with a new m=video.
       MediaSection? oldMediaSection = _mediaSections.firstWhereOrNull(
-        (MediaSection m) => m.closed,
+            (MediaSection m) => m.closed,
       );
 
       if (oldMediaSection != null) {
@@ -347,9 +347,7 @@ class RemoteSdp {
   }
 
   void _addMediaSection(MediaSection newMediaSection) {
-    if (_firstMid == null) {
-      _firstMid = newMediaSection.mid!;
-    }
+    _firstMid ??= newMediaSection.mid!;
 
     // Add to the vector.
     _mediaSections.add(newMediaSection);

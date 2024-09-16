@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 
-import 'package:mediasoup_client_flutter/src/common/enhanced_event_emitter.dart';
-import 'package:mediasoup_client_flutter/src/common/logger.dart';
-import 'package:mediasoup_client_flutter/src/rtp_parameters.dart';
+import 'package:tapi_mediasoup_client/src/common/enhanced_event_emitter.dart';
+import 'package:tapi_mediasoup_client/src/common/logger.dart';
+import 'package:tapi_mediasoup_client/src/rtp_parameters.dart';
 
 // https://mediasoup.org/documentation/v3/mediasoup-client/api/#ProducerCodecOptions
 class ProducerCodecOptions {

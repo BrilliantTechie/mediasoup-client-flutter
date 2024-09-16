@@ -1,6 +1,6 @@
 
 
-import 'package:mediasoup_client_flutter/src/common/index.dart';
+import 'package:tapi_mediasoup_client/src/common/index.dart';
 
 class NumSctpStreams {
   /*

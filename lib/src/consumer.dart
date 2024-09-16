@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart' show mapEquals;
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 
-import 'package:mediasoup_client_flutter/src/common/enhanced_event_emitter.dart';
-import 'package:mediasoup_client_flutter/src/common/logger.dart';
-import 'package:mediasoup_client_flutter/src/rtp_parameters.dart';
+import 'package:tapi_mediasoup_client/src/common/enhanced_event_emitter.dart';
+import 'package:tapi_mediasoup_client/src/common/logger.dart';
+import 'package:tapi_mediasoup_client/src/rtp_parameters.dart';
 
 Logger _logger = Logger('Consumer');
 
@@ -21,7 +21,7 @@ class ConsumerOptions {
   });
 }
 
-typedef void ConsumerOnTrackEnded();
+typedef ConsumerOnTrackEnded = void Function();
 
 class Consumer extends EnhancedEventEmitter {
   /// Id.
@@ -264,16 +264,16 @@ class Consumer extends EnhancedEventEmitter {
   @override
   int get hashCode {
     return id.hashCode ^
-        localId.hashCode ^
-        producerId.hashCode ^
-        closed.hashCode ^
-        rtpReceiver.hashCode ^
-        track.hashCode ^
-        rtpParameters.hashCode ^
-        paused.hashCode ^
-        appData.hashCode ^
-        stream.hashCode ^
-        peerId.hashCode;
+    localId.hashCode ^
+    producerId.hashCode ^
+    closed.hashCode ^
+    rtpReceiver.hashCode ^
+    track.hashCode ^
+    rtpParameters.hashCode ^
+    paused.hashCode ^
+    appData.hashCode ^
+    stream.hashCode ^
+    peerId.hashCode;
   }
 
   Consumer copyWith({

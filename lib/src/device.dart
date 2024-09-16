@@ -1,11 +1,11 @@
 import 'package:flutter_webrtc/flutter_webrtc.dart';
-import 'package:mediasoup_client_flutter/src/ortc.dart';
-import 'package:mediasoup_client_flutter/src/rtp_parameters.dart';
-import 'package:mediasoup_client_flutter/src/sctp_parameters.dart';
-import 'package:mediasoup_client_flutter/src/transport.dart';
-import 'package:mediasoup_client_flutter/src/common/enhanced_event_emitter.dart';
-import 'package:mediasoup_client_flutter/src/common/logger.dart';
-import 'package:mediasoup_client_flutter/src/handlers/handler_interface.dart';
+import 'package:tapi_mediasoup_client/src/ortc.dart';
+import 'package:tapi_mediasoup_client/src/rtp_parameters.dart';
+import 'package:tapi_mediasoup_client/src/sctp_parameters.dart';
+import 'package:tapi_mediasoup_client/src/transport.dart';
+import 'package:tapi_mediasoup_client/src/common/enhanced_event_emitter.dart';
+import 'package:tapi_mediasoup_client/src/common/logger.dart';
+import 'package:tapi_mediasoup_client/src/handlers/handler_interface.dart';
 
 Logger _logger = Logger('Device');
 
@@ -22,7 +22,7 @@ class Device {
   // Local SCTP capabilities.
   SctpCapabilities? _sctpCapabilities;
   // Observer instance.
-  EnhancedEventEmitter _observer = EnhancedEventEmitter();
+  final EnhancedEventEmitter _observer = EnhancedEventEmitter();
 
   // Whether the Device is loaded.
   bool get loaded => _loaded;
@@ -74,7 +74,7 @@ class Device {
       handler = HandlerInterface.handlerFactory();
 
       RtpCapabilities nativeRtpCapabilities =
-          await handler.getNativeRtpCapabilities();
+      await handler.getNativeRtpCapabilities();
 
       _logger
           .debug('load() | got native RTP capabilities:$nativeRtpCapabilities');
@@ -125,7 +125,7 @@ class Device {
         await handler.close();
       }
 
-      throw error;
+      rethrow;
     }
   }
 
@@ -250,10 +250,10 @@ class Device {
   }
 
   Transport createSendTransportFromMap(
-    Map data, {
-    Function? producerCallback,
-    Function? dataProducerCallback,
-  }) {
+      Map data, {
+        Function? producerCallback,
+        Function? dataProducerCallback,
+      }) {
     return createSendTransport(
       id: data['id'],
       iceParameters: IceParameters.fromMap(data['iceParameters']),
@@ -319,10 +319,10 @@ class Device {
   }
 
   Transport createRecvTransportFromMap(
-    Map data, {
-    Function? consumerCallback,
-    Function? dataConsumerCallback,
-  }) {
+      Map data, {
+        Function? consumerCallback,
+        Function? dataConsumerCallback,
+      }) {
     return createRecvTransport(
       id: data['id'],
       iceParameters: IceParameters.fromMap(data['iceParameters']),

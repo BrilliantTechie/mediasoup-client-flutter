@@ -1,26 +1,26 @@
-name: mediasoup_client_flutter
+name: tapi_mediasoup_client
 description: Mediasoup client side Flutter library. Work for Android, iOS, MacOS, Windows and browser.
-version: 0.8.5
+version: 0.0.1
 homepage: https://github.com/Blancduman/mediasoup-client-flutter
 repository: https://github.com/Blancduman/mediasoup-client-flutter
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: '>=3.3.3 <4.0.0'
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_webrtc: ^0.9.33
+  flutter_webrtc: 0.11.7
   events2: ^1.0.0
   sdp_transform: ^0.3.2
-  collection: ^1.16.0
-  h264_profile_level_id: ^0.2.0
+  collection: ^1.18.0
+  h264_profile_level_id: 0.2.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  test: ^1.9.3
+  flutter_lints: ^4.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

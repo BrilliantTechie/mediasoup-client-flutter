@@ -1,15 +1,15 @@
 import 'package:flutter_webrtc/flutter_webrtc.dart';
-import 'package:mediasoup_client_flutter/src/rtp_parameters.dart';
-import 'package:mediasoup_client_flutter/src/handlers/sdp/media_section.dart';
+import 'package:tapi_mediasoup_client/src/rtp_parameters.dart';
+import 'package:tapi_mediasoup_client/src/handlers/sdp/media_section.dart';
 
 class PlanBUtils {
   static List<RtpEncodingParameters> getRtpEncodings(
-    MediaObject offerMediaObject,
-    MediaStreamTrack track,
-  ) {
+      MediaObject offerMediaObject,
+      MediaStreamTrack track,
+      ) {
     // First media SSRC (or the only one).
     int? firstSsrc;
-    Set<int> ssrcs = Set<int>();
+    Set<int> ssrcs = <int>{};
 
     for (Ssrc line in offerMediaObject.ssrcs ?? []) {
       if (line.attribute != 'msid') {
@@ -23,9 +23,7 @@ class PlanBUtils {
 
         ssrcs.add(ssrc);
 
-        if (firstSsrc == null) {
-          firstSsrc = ssrc;
-        }
+        firstSsrc ??= ssrc;
       }
     }
 
@@ -44,7 +42,7 @@ class PlanBUtils {
       List<String> tokens = line.ssrcs.split(' ');
 
       int? ssrc;
-      if (tokens.length > 0) {
+      if (tokens.isNotEmpty) {
         ssrc = int.parse(tokens.first);
       }
 
@@ -90,10 +88,10 @@ class PlanBUtils {
 
   /// Adds multi-ssrc based simulcast into the given SDP media section offer.
   static void addLegacySimulcast(
-    MediaObject offerMediaObject,
-    MediaStreamTrack track,
-    int numStreams,
-  ) {
+      MediaObject offerMediaObject,
+      MediaStreamTrack track,
+      int numStreams,
+      ) {
     if (numStreams <= 1) {
       throw ('numStreams must be greater than 1');
     }
@@ -104,7 +102,7 @@ class PlanBUtils {
 
     // Get the SSRC.
     Ssrc? ssrcMsidLine = (offerMediaObject.ssrcs ?? []).firstWhere(
-      (Ssrc line) {
+          (Ssrc line) {
         if (line.attribute != 'msid') {
           return false;
         }
@@ -122,10 +120,6 @@ class PlanBUtils {
       },
       orElse: () => null as Ssrc,
     );
-
-    if (ssrcMsidLine == null) {
-      throw ('a=ssrc line with msid information not found [track.id:${track.id}]');
-    }
 
     // Get the SSRC for RTX.
     (offerMediaObject.ssrcGroups ?? []).any((SsrcGroup line) {
@@ -145,7 +139,7 @@ class PlanBUtils {
     });
 
     Ssrc? ssrcCnameLine = offerMediaObject.ssrcs?.firstWhere(
-      (Ssrc line) => line.attribute == 'cname' && line.id == firstSsrc,
+          (Ssrc line) => line.attribute == 'cname' && line.id == firstSsrc,
       orElse: () => null as Ssrc,
     );
 
